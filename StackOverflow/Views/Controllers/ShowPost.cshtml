@@ -1,0 +1,65 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "ShowPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    body {
+        font-family: sans-serif;
+    }
+
+    .contenedor {
+        width: 700px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .fecha-creacion {
+        margin-left: 60px;
+        font-size: 10px;
+        
+    }
+
+    .descripcion {
+        width: 100%;
+        height: 200px;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+</style>
+
+<div class="card">
+    <div class="card-header">
+        Look
+    </div>
+
+    <div class="contenedor">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px">
+            <h1>@Model.PostTitle</h1>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a asp-action="UpdatePost" asp-controller="Controllers" asp-route-id="@Model.IdPost" class="btn btn-primary me-md-2 btn-sm" type="button">Editar</a>
+                <a asp-action="Eliminar" asp-controller="Controllers" asp-route-id="@Model.IdPost" class="btn btn-danger btn-sm" type="button">Eliminar</a>
+            </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; margin-bottom: 20px">
+            <p class="categoria">@Model.Category.Name</p>
+            <p class="fecha-creacion">@Model.CreationDate.ToString("yyyy - MM - dd")</p>
+        </div>
+        <div class="descripcion">
+            <p>@Model.PostDescription</p>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 20px; margin-top: 10px">
+            
+            <a asp-action="UpVote" asp-controller="Controllers" asp-route-id="@Model.IdPost" class="btn btn-primary btn-sm">↑</a>
+            <a asp-action="DownVote" asp-controller="Controllers" asp-route-id="@Model.IdPost" class="btn btn-primary btn-sm" style="margin-left:5px">↓</a>
+        </div>
+    </div>
+
+</div>

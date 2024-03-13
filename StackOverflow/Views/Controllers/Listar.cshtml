@@ -1,0 +1,42 @@
+﻿@using StackOverflow.NewFolder
+@model List<Post>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        All Posts
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; padding-left: 30px; padding-right: 20px">
+        <div style="display: flex; align-items: center;">
+            <p style="margin: 0; font-size: 15px; margin-right: 10px;">@Model.Count()</p>
+            <h5 style="margin: 0; font-size: 15px;">Posts</h5>
+        </div>
+        <a asp-action="InsertPost" asp-controller="Controllers" style="padding: 5px 10px;" class="btn btn-primary">Add Post</a>
+    </div>
+
+    <div class="card-body">
+        @foreach (var i in Model)
+        {
+            <div class="card">
+                <div class="card-header" style="display: flex; align-items: center;">
+                    <p style ="margin-bottom: 0px">UpVote: </p>
+                    <p style="margin-left: 6px; margin-bottom: 0px">@i.UpVote</p>
+                    <p style="margin-left: 6px; margin-bottom: 0px">DownVote: </p>
+                    <p style="margin-left: 6px; margin-bottom: 0px">@i.DownVote</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@i.PostTitle</h5>
+                    <p class="card-text">@i.PostDescription.Max60()</p>
+                    <a asp-action="ShowPost" asp-controller="Controllers" asp-route-id="@i.IdPost" class="btn btn-primary">Go to Post</a>
+                </div>
+            </div>
+
+            <div style="margin: 20px;"></div>
+        }
+
+    </div>
+</div>

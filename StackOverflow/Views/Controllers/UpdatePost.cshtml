@@ -1,0 +1,36 @@
+﻿@model ModelViews
+@{
+    ViewData["Title"] = "UpdatePost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        UpdatePost
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input asp-for="newPost.IdPost" type="hidden" class="form-control">
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input asp-for="newPost.PostTitle" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Categories</label>
+                <select asp-for="Category" id="disabledSelect" class="form-select">
+                    @foreach (var i in ModelViews.categories)
+                    {
+                        <option>@i.Name</option>
+                    }
+                </select> 
+            </div>
+            <hr />
+            <div class="form-floating mb-3">
+                <textarea asp-for="newPost.PostDescription" class="form-control" placeholder="Leave a body here" id="floatingTextarea2" style="height: 150px"></textarea>
+                <label for="floatingTextarea2">Body</label>
+            </div>
+            <button asp-page-handler="UpdatePost" type="submit" class="btn btn-primary">Editar</button>
+        </form>
+    </div>
+</div>
